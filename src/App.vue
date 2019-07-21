@@ -31,7 +31,8 @@ export default {
   watch:{
     counter_num: function(){
         this.list.length = parseInt(this.counter_num);
-        this.list.fill(0);
+        this.totalNum = this.list.reduce((sum, cur) => sum + cur,0);
+        this.list.fill(0,this.counter_num);
     }
   },
   components:{
