@@ -1,31 +1,44 @@
 <template>
   <div id="app">
-    <input type="text" />
-    
+    <input type="text" v-model.number="counter_num"/>
+    <counter v-for="counter in counter_num" 
+            :idx = "counter" 
+            @change="listChange"></counter>
+    <p>总数为：{{totalNum}}</p>
   </div>
   
   
 </template>
-<script>
 
+<script>
+import counter from './components/Counter'
 export default {
   name: 'app',
   data: function(){
     return {
-      count: 0
+      count: 0,
+      counter_num: 0,
+      list:[],
+      totalNum:0
     };
   },
-  methods: {
-    add: function(){
-      this.count++;
-    },
-    extract: function(){
-      this.count--;
+  methods:{
+    listChange: function(index,value){
+      this.list[index] = value;     
+      this.totalNum = this.list.reduce((sum, cur) => sum + cur,0);
     }
+  },
+  watch:{
+    counter_num: function(){
+        this.list.length = parseInt(this.counter_num);
+        this.list.fill(0);
+    }
+  },
+  components:{
+    counter:counter
   }
 };
 </script>
-
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
