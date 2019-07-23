@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{count}}</p>
+    <p>{{item.number}}</p>
     <button @click="add">点我+</button>
     <button @click="sub">点我-</button>
   </div>
@@ -9,24 +9,22 @@
 <script>
 export default {
   name: 'counter',
-  props:['idx'],
+  props:['item'],
   data: function(){
     return {
-      count: 0
+      
     };
   },
   methods:{
       add: function(){
-          this.count++;
-          this.$emit('change',this.idx-1,this.count);
+          this.item.number++;
+          //this.$emit('change',this.idx-1,this.count);
       },
       sub: function(){
-          this.count--;
-          this.$emit('change',this.idx-1,this.count);
+          this.item.number--;
+          //this.$emit('change',this.idx-1,this.count);
       }
   }
 };
-
-
 </script>
 

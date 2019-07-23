@@ -1,42 +1,47 @@
 <template>
   <div id="app">
-    <input type="text" v-model.number="counter_num"/>
-    <counter v-for="counter in counter_num" 
-            :idx = "counter" 
-            @change="listChange"></counter>
-    <p>总数为：{{totalNum}}</p>
+    <counter-group></counter-group>
+    <counter-sum></counter-sum>
   </div>
   
   
 </template>
 
 <script>
-import counter from './components/Counter'
+import CounterGroup from './components/CounterGroup.vue'
+import CounterSum from './components/CounterSum.vue'
+
 export default {
   name: 'app',
   data: function(){
     return {
-      count: 0,
-      counter_num: 0,
-      list:[],
-      totalNum:0
+      // count: 0,
+      // list:[],
+      // totalNum:0,
     };
   },
-  methods:{
-    listChange: function(index,value){
-      this.list[index] = value;     
-      this.totalNum = this.list.reduce((sum, cur) => sum + cur,0);
-    }
-  },
-  watch:{
-    counter_num: function(){
-        this.list = this.list.slice(0,parseInt(this.counter_num));
-        this.totalNum = this.list.reduce((sum, cur) => sum + cur,0);
-        //this.list.fill(0,this.counter_num);
-    }
-  },
+  // methods:{
+  //   listChange: function(index,value){
+  //     this.list[index] = value;     
+  //     this.totalNum = this.list.reduce((sum, cur) => sum + cur,0);
+  //   },
+  //   counterNumberChange: function(){
+  //     console.log('counter_num is changed： '+this.counter_num);
+  //     this.$store.commit('setCountNumber',this.counter_num);
+  //   }
+  // },
+  // computed:{
+  //   counter_num: function(){
+  //     return this.$store.getters.getCountNumber;
+  //     //return this.$sotre.commit('getCountNumber');
+  //       //this.list = this.list.slice(0,parseInt(this.counter_num));
+  //       //this.totalNum = this.list.reduce((sum, cur) => sum + cur,0);
+  //       //this.list.fill(0,this.counter_num);
+  //   }
+  // },
   components:{
-    counter:counter
+    counterGroup:CounterGroup,
+    counterSum: CounterSum
   }
 };
 </script>

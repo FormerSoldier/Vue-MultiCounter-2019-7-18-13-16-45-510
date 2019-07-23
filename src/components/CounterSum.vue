@@ -8,7 +8,8 @@ export default {
   props:['idx'],
   data: function(){
     return {
-      count: 0
+      count: 0,
+      totalNum: 0
     };
   },
   methods:{
