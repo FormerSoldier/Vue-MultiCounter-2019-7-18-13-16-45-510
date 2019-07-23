@@ -6,21 +6,10 @@
 export default {
   name: 'counter',
   props:['idx'],
-  data: function(){
-    return {
-      count: 0,
-      totalNum: 0
-    };
-  },
-  methods:{
-      add: function(){
-          this.count++;
-          this.$emit('change',this.idx-1,this.count);
-      },
-      sub: function(){
-          this.count--;
-          this.$emit('change',this.idx-1,this.count);
-      }
+  computed:{
+    totalNum: function(){
+      return this.$store.getters.getItemList.reduce((initVal, cur) => initVal + cur,0);
+    }
   }
 };
 
